@@ -19,6 +19,13 @@
 
     <dependencies>
 
+
+        <dependency>
+            <groupId>org.rpc</groupId>
+            <artifactId>client</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
