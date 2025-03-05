@@ -1,5 +1,7 @@
 package org.llm.openai.model;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 public class OpenAIConversationReply {
@@ -19,6 +21,15 @@ public class OpenAIConversationReply {
             this.index = index;
             this.message = message;
         }
+
+        @Override
+        public String toString() {
+            return new Gson().toJson(this);
+        }
     }
 
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }

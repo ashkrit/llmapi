@@ -1,6 +1,7 @@
 package org.llm;
 
 import org.llm.openai.AnthropicService;
+import org.llm.openai.GroqService;
 import org.llm.openai.model.Conversation;
 import org.llm.openai.model.OpenAIEmbedding;
 import org.llm.openai.OpenAIService;
@@ -15,6 +16,7 @@ public class App {
 
     static String gptApiKey = "Bearer " + System.getenv("gpt_key");
     static String anthropicApiKey =  System.getenv("ANTHROPIC_API_KEY");
+    static String groqApiKey =  "Bearer " + System.getenv("gorq_key");
 
     public static void main(String[] args) {
 
@@ -26,7 +28,8 @@ public class App {
         //_embeddings(service);
         //_chat(service);
 
-        _anthropicChat();
+        //_anthropicChat();
+        _groqChat();
 
     }
 
@@ -48,6 +51,25 @@ public class App {
         }
     }
 
+
+    private static void _groqChat() {
+        var service = new RpcBuilder()
+                .serviceUrl("https://api.groq.com/openai")
+                .create(GroqService.class);
+
+        var message = new Conversation("llama-3.3-70b-versatile");
+        message.append("user", "Say this is test");
+        var replyMessage = service.chat(groqApiKey, message);
+        replyMessage.execute();
+
+        if (replyMessage.isSuccess()) {
+            System.out.println(replyMessage.value());
+        } else {
+            System.out.println(replyMessage.exception());
+            System.out.println(replyMessage.error());
+        }
+    }
+
     private static void _chat(OpenAIService service) {
 
         var message = new Conversation("gpt-4o-mini");
@@ -56,7 +78,7 @@ public class App {
         replyMessage.execute();
 
         if (replyMessage.isSuccess()) {
-            System.out.println(replyMessage.value().choices.get(0).message);
+            System.out.println(replyMessage.value().choices);
         } else {
             System.out.println(replyMessage.exception());
             System.out.println(replyMessage.error());
