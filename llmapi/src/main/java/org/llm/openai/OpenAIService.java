@@ -1,7 +1,7 @@
 package org.llm.openai;
 
 import org.llm.openai.model.Conversation;
-import org.llm.openai.model.ConversationReply;
+import org.llm.openai.model.OpenAIConversationReply;
 import org.llm.openai.model.OpenAIEmbedding;
 import org.llm.openai.model.OpenAIEmbedding.OpenAIEmbeddingReply;
 import org.rpc.http.XBody;
@@ -20,7 +20,7 @@ public interface OpenAIService {
 
     @XPOST("/v1/chat/completions")
     @XHeaders({"Content-Type: application/json"})
-    RpcReply<ConversationReply> chat(@XHeader("Authorization") String apiKey, @XBody Conversation conversation);
+    RpcReply<OpenAIConversationReply> chat(@XHeader("Authorization") String apiKey, @XBody Conversation conversation);
 
 
 }

@@ -1,5 +1,6 @@
 package org.llm;
 
+import org.llm.openai.AnthropicService;
 import org.llm.openai.model.Conversation;
 import org.llm.openai.model.OpenAIEmbedding;
 import org.llm.openai.OpenAIService;
@@ -12,23 +13,46 @@ import java.util.Arrays;
  */
 public class App {
 
-    static String apiKey = "Bearer " + System.getenv("gpt_key");
+    static String gptApiKey = "Bearer " + System.getenv("gpt_key");
+    static String anthropicApiKey =  System.getenv("ANTHROPIC_API_KEY");
 
     public static void main(String[] args) {
 
-        var builder = new RpcBuilder().serviceUrl("https://api.openai.com/");
-        var service = builder.create(OpenAIService.class);
 
-        _embeddings(service);
-        _chat(service);
+        var service = new RpcBuilder()
+                .serviceUrl("https://api.openai.com/")
+                .create(OpenAIService.class);
 
+        //_embeddings(service);
+        //_chat(service);
+
+        _anthropicChat();
+
+    }
+
+    private static void _anthropicChat() {
+        var anthropicService = new RpcBuilder()
+                .serviceUrl("https://api.anthropic.com")
+                .create(AnthropicService.class);
+
+        var message = new Conversation("claude-3-7-sonnet-20250219");
+        message.append("user", "Say this is test");
+        var replyMessage = anthropicService.chat(anthropicApiKey, message);
+        replyMessage.execute();
+
+        if (replyMessage.isSuccess()) {
+            System.out.println(replyMessage.value());
+        } else {
+            System.out.println(replyMessage.exception());
+            System.out.println(replyMessage.error());
+        }
     }
 
     private static void _chat(OpenAIService service) {
 
         var message = new Conversation("gpt-4o-mini");
         message.append("user", "Say this is test");
-        var replyMessage = service.chat(apiKey, message);
+        var replyMessage = service.chat(gptApiKey, message);
         replyMessage.execute();
 
         if (replyMessage.isSuccess()) {
@@ -41,7 +65,7 @@ public class App {
 
     private static void _embeddings(OpenAIService service) {
         var openAIEmbedding = new OpenAIEmbedding("text-embedding-3-small", "How are you");
-        var reply = service.embedding(apiKey, openAIEmbedding);
+        var reply = service.embedding(gptApiKey, openAIEmbedding);
 
         reply.execute();
 

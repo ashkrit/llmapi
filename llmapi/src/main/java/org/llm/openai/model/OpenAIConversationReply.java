@@ -2,11 +2,11 @@ package org.llm.openai.model;
 
 import java.util.List;
 
-public class ConversationReply {
+public class OpenAIConversationReply {
 
     public final List<ReplyMessage> choices;
 
-    public ConversationReply(List<ReplyMessage> choices) {
+    public OpenAIConversationReply(List<ReplyMessage> choices) {
         this.choices = choices;
     }
 
