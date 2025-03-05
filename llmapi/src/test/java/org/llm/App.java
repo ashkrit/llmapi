@@ -1,8 +1,10 @@
 package org.llm;
 
 import org.llm.openai.AnthropicService;
+import org.llm.openai.GoogleService;
 import org.llm.openai.GroqService;
 import org.llm.openai.model.Conversation;
+import org.llm.openai.model.GoogleConversation;
 import org.llm.openai.model.OpenAIEmbedding;
 import org.llm.openai.OpenAIService;
 import org.rpc.service.RpcBuilder;
@@ -15,8 +17,9 @@ import java.util.Arrays;
 public class App {
 
     static String gptApiKey = "Bearer " + System.getenv("gpt_key");
-    static String anthropicApiKey =  System.getenv("ANTHROPIC_API_KEY");
-    static String groqApiKey =  "Bearer " + System.getenv("gorq_key");
+    static String anthropicApiKey = System.getenv("ANTHROPIC_API_KEY");
+    static String groqApiKey = "Bearer " + System.getenv("gorq_key");
+    static String googleAPiKey = System.getenv("gemma_key");
 
     public static void main(String[] args) {
 
@@ -29,7 +32,8 @@ public class App {
         //_chat(service);
 
         //_anthropicChat();
-        _groqChat();
+        // _groqChat();
+        _googleChat();
 
     }
 
@@ -69,6 +73,26 @@ public class App {
             System.out.println(replyMessage.error());
         }
     }
+
+
+    private static void _googleChat() {
+        var service = new RpcBuilder()
+                .serviceUrl("https://generativelanguage.googleapis.com")
+                .create(GoogleService.class);
+
+        var message = new GoogleConversation();
+        message.append("Say this is test");
+        var replyMessage = service.chat(googleAPiKey, message);
+        replyMessage.execute();
+
+        if (replyMessage.isSuccess()) {
+            System.out.println(replyMessage.value());
+        } else {
+            System.out.println(replyMessage.exception());
+            System.out.println(replyMessage.error());
+        }
+    }
+
 
     private static void _chat(OpenAIService service) {
 
