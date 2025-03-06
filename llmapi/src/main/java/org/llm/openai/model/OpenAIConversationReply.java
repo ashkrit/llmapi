@@ -4,12 +4,19 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-public class OpenAIConversationReply {
+public class OpenAIConversationReply implements ChatMessageReply {
 
     public final List<ReplyMessage> choices;
 
     public OpenAIConversationReply(List<ReplyMessage> choices) {
         this.choices = choices;
+    }
+
+    @Override
+    public String message() {
+        var last = choices.get(choices.size() - 1);
+        return last.message.content();
+
     }
 
 
