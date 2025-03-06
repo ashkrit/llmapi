@@ -1,5 +1,3 @@
-Here's a README.md for the project:
-
 
 # Java LLM Client
 
