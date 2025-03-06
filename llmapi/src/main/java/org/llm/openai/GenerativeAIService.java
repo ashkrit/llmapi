@@ -9,6 +9,6 @@ public interface GenerativeAIService {
     ChatMessageReply chat(ChatRequest conversation);
 
     default EmbeddingReply embedding(EmbeddingRequest embedding) {
-        throw new UnsupportedOperationException("Not implemented");
+        throw new UnsupportedOperationException("Not Supported");
     }
 }
