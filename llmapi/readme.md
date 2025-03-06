@@ -81,4 +81,93 @@ System.out.println(Arrays.toString(vector.embedding()));
 - Google: gemma
 - Groq: llama-3.3-70b-versatile
 - Ollama: llama3.2, all-minilm
+
+
+## How to Register a Service Provider
+
+
+
+## Supported Factories and Registration
+
+The following AI service factories are supported out of the box:
+
+```java
+// OpenAI
+registerService(OpenAIFactory.NAME, new OpenAIFactory());
+
+// Anthropic
+registerService(AnthropicAIFactory.NAME, new AnthropicAIFactory());
+
+// Google
+registerService(GoogleAIFactory.NAME, new GoogleAIFactory());
+
+// Groq
+registerService(GroqFactory.NAME, new GroqFactory());
+
+// Ollama (Local)
+registerService(OllamaFactory.NAME, new OllamaFactory());
 ```
+
+### Service Configuration
+
+Each provider requires specific configuration:
+
+#### OpenAI
+```java
+Map<String, Object> properties = Map.of("apiKey", System.getenv("gpt_key"));
+var service = GenerativeAIDriverManager.create(
+    OpenAIFactory.NAME, 
+    "https://api.openai.com/", 
+    properties
+);
+```
+
+#### Anthropic
+```java
+Map<String, Object> properties = Map.of("apiKey", System.getenv("ANTHROPIC_API_KEY"));
+var service = GenerativeAIDriverManager.create(
+    AnthropicAIFactory.NAME, 
+    "https://api.anthropic.com", 
+    properties
+);
+```
+
+#### Google
+```java
+Map<String, Object> properties = Map.of("apiKey", System.getenv("gemma_key"));
+var service = GenerativeAIDriverManager.create(
+    GoogleAIFactory.NAME, 
+    "https://generativelanguage.googleapis.com", 
+    properties
+);
+```
+
+#### Groq
+```java
+Map<String, Object> properties = Map.of("apiKey", System.getenv("gorq_key"));
+var service = GenerativeAIDriverManager.create(
+    GroqFactory.NAME, 
+    "https://api.groq.com/openai", 
+    properties
+);
+```
+
+#### Ollama (Local)
+```java
+Map<String, Object> properties = Map.of();
+var service = GenerativeAIDriverManager.create(
+    OllamaFactory.NAME, 
+    "http://localhost:11434", 
+    properties
+);
+```
+
+### Factory Constants
+
+Access factory names using these constants:
+```java
+OpenAIFactory.NAME      // "openai"
+AnthropicAIFactory.NAME // "anthropic"
+GoogleAIFactory.NAME    // "google"
+GroqFactory.NAME        // "groq"
+OllamaFactory.NAME      // "ollama"
