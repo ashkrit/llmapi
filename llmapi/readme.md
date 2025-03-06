@@ -38,14 +38,6 @@ Add the following dependency to your `pom.xml`:
 - API keys for respective services
 - Ollama running locally (for Ollama support)
 
-## Environment Variables
-
-```bash
-gpt_key=your_openai_key
-ANTHROPIC_API_KEY=your_anthropic_key
-gorq_key=your_groq_key
-gemma_key=your_google_key
-```
 
 ## Usage Example
 
