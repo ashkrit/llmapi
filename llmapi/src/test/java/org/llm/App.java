@@ -1,6 +1,6 @@
 package org.llm;
 
-import org.llm.openai.AnthropicService;
+import org.llm.openai.anthropic.AnthropicService;
 import org.llm.openai.GoogleService;
 import org.llm.openai.GroqService;
 import org.llm.openai.model.*;

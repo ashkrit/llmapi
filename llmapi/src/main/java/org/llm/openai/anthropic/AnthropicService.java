@@ -1,4 +1,4 @@
-package org.llm.openai;
+package org.llm.openai.anthropic;
 
 import org.llm.openai.model.internal.AnthropicMessageReply;
 import org.llm.openai.model.internal.Conversation;
