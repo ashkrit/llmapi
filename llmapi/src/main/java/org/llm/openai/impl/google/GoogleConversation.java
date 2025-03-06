@@ -5,6 +5,7 @@ import java.util.List;
 
 public class GoogleConversation {
     public List<Content> contents = new ArrayList<>();
+    public GoogleGenerationConfig generationConfig;
 
     public static class Content {
         public String role;

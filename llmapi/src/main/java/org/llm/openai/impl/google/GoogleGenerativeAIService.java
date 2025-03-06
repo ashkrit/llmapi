@@ -21,6 +21,8 @@ public class GoogleGenerativeAIService implements GenerativeAIService {
 
         var apiKey = (String) properties.get("apiKey");
         var message = new GoogleConversation();
+        message.generationConfig = new GoogleGenerationConfig();
+        message.generationConfig.temperature = conversation.temperature();
 
 
         //append conversation messages to the message

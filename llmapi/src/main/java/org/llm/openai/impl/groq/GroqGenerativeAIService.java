@@ -21,7 +21,7 @@ public class GroqGenerativeAIService implements GenerativeAIService {
     public ChatMessageReply chat(ChatRequest conversation) {
 
         var apiKey = "Bearer " + properties.get("apiKey");
-        var message = new OpenAIConversationRequest(conversation.model());
+        var message = new OpenAIConversationRequest(conversation.model(),conversation.temperature(),false);
 
         //append conversation messages to the message
         conversation.messages().forEach(m -> {

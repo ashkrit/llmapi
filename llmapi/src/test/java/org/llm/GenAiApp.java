@@ -42,7 +42,7 @@ public class GenAiApp {
 
         System.out.println(service);
         var messages = new ChatMessage("user", "Hello, how are you?");
-        var conversation = new ChatRequest("gpt-4o-mini", List.of(messages));
+        var conversation = ChatRequest.create("gpt-4o-mini", List.of(messages));
         var reply = service.chat(conversation);
         System.out.println(reply.message());
 
@@ -58,7 +58,7 @@ public class GenAiApp {
 
         System.out.println(service);
         var messages = new ChatMessage("user", "Hello, how are you?");
-        var conversation = new ChatRequest("llama3.2", List.of(messages));
+        var conversation = ChatRequest.create("llama3.2", List.of(messages));
         var reply = service.chat(conversation);
         System.out.println(reply.message());
 
@@ -73,7 +73,7 @@ public class GenAiApp {
 
         System.out.println(service);
         var messages = new ChatMessage("user", "Hello, how are you?");
-        var conversation = new ChatRequest("claude-3-7-sonnet-20250219", List.of(messages));
+        var conversation = ChatRequest.create("claude-3-7-sonnet-20250219", List.of(messages));
         var reply = service.chat(conversation);
         System.out.println(reply.message());
     }
@@ -86,7 +86,7 @@ public class GenAiApp {
 
         System.out.println(service);
         var messages = new ChatMessage("user", "Hello, how are you?");
-        var conversation = new ChatRequest("gemma", List.of(messages));
+        var conversation = ChatRequest.create("gemma", List.of(messages));
         var reply = service.chat(conversation);
         System.out.println(reply.message());
     }
@@ -98,7 +98,7 @@ public class GenAiApp {
 
         System.out.println(service);
         var messages = new ChatMessage("user", "Hello, how are you?");
-        var conversation = new ChatRequest("llama-3.3-70b-versatile", List.of(messages));
+        var conversation = ChatRequest.create("deepseek-r1-distill-qwen-32b", List.of(messages));
         var reply = service.chat(conversation);
         System.out.println(reply.message());
     }

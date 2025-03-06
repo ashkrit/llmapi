@@ -25,7 +25,7 @@ public class OllamaGenerativeAIService implements GenerativeAIService {
     @Override
     public ChatMessageReply chat(ChatRequest conversation) {
 
-        var message = new OpenAIConversationRequest(conversation.model());
+        var message = new OpenAIConversationRequest(conversation.model(),conversation.temperature(),false);
 
         //append conversation messages to the message
         conversation.messages().forEach(m -> {
