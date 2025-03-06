@@ -1,9 +1,21 @@
 Here's a README.md for the project:
 
-```markdown
+
 # Java LLM Client
 
 A Java client library for interacting with various Large Language Model (LLM) APIs including OpenAI, Anthropic, Google, Groq, and Ollama.
+
+## Maven Coordinates
+
+Add the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.llm</groupId>
+    <artifactId>java-llm-client</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
 
 ## Features
 
