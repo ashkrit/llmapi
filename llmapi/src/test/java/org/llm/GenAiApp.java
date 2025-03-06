@@ -4,6 +4,7 @@ import org.llm.openai.GenerativeAIDriverManager;
 import org.llm.openai.impl.anthropic.AnthropicAIFactory;
 import org.llm.openai.impl.google.GoogleAIFactory;
 import org.llm.openai.impl.groq.GroqFactory;
+import org.llm.openai.impl.ollama.OllamaFactory;
 import org.llm.openai.model.ChatRequest;
 import org.llm.openai.model.ChatRequest.ChatMessage;
 import org.llm.openai.impl.openai.OpenAIFactory;
@@ -23,11 +24,13 @@ public class GenAiApp {
         registerService(AnthropicAIFactory.NAME, new AnthropicAIFactory());
         registerService(GoogleAIFactory.NAME, new GoogleAIFactory());
         registerService(GroqFactory.NAME, new GroqFactory());
+        registerService(OllamaFactory.NAME, new OllamaFactory());
 
         _openAi();
         _anthropicAi();
         _googleAi();
         _groqAi();
+        _ollamaAi();
 
 
     }
@@ -44,6 +47,22 @@ public class GenAiApp {
         System.out.println(reply.message());
 
         var vector = service.embedding(new EmbeddingRequest("text-embedding-3-small", "How are you"));
+        System.out.println(Arrays.toString(vector.embedding()));
+    }
+
+
+    private static void _ollamaAi() {
+        Map<String, Object> properties = Map.of();
+        var service = GenerativeAIDriverManager.create(OllamaFactory.NAME, "http://localhost:11434", properties);
+
+
+        System.out.println(service);
+        var messages = new ChatMessage("user", "Hello, how are you?");
+        var conversation = new ChatRequest("llama3.2", List.of(messages));
+        var reply = service.chat(conversation);
+        System.out.println(reply.message());
+
+        var vector = service.embedding(new EmbeddingRequest("all-minilm", "How are you"));
         System.out.println(Arrays.toString(vector.embedding()));
     }
 
