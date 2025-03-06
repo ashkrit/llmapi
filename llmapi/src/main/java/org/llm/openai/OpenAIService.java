@@ -1,9 +1,9 @@
 package org.llm.openai;
 
-import org.llm.openai.model.Conversation;
-import org.llm.openai.model.OpenAIConversationReply;
-import org.llm.openai.model.OpenAIEmbedding;
-import org.llm.openai.model.OpenAIEmbedding.OpenAIEmbeddingReply;
+import org.llm.openai.model.internal.Conversation;
+import org.llm.openai.model.internal.OpenAIConversationReply;
+import org.llm.openai.model.internal.OpenAIEmbedding;
+import org.llm.openai.model.internal.OpenAIEmbedding.OpenAIEmbeddingReply;
 import org.rpc.http.XBody;
 import org.rpc.http.XHeader;
 import org.rpc.http.XHeaders;

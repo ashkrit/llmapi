@@ -1,7 +1,7 @@
 package org.llm.openai;
 
-import org.llm.openai.model.AnthropicMessageReply;
-import org.llm.openai.model.Conversation;
+import org.llm.openai.model.internal.AnthropicMessageReply;
+import org.llm.openai.model.internal.Conversation;
 import org.rpc.http.XBody;
 import org.rpc.http.XHeader;
 import org.rpc.http.XHeaders;

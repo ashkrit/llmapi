@@ -3,10 +3,12 @@ package org.llm;
 import org.llm.openai.AnthropicService;
 import org.llm.openai.GoogleService;
 import org.llm.openai.GroqService;
-import org.llm.openai.model.Conversation;
-import org.llm.openai.model.GoogleConversation;
-import org.llm.openai.model.OpenAIEmbedding;
+import org.llm.openai.model.*;
 import org.llm.openai.OpenAIService;
+import org.llm.openai.model.internal.Conversation;
+import org.llm.openai.model.internal.GoogleConversation;
+import org.llm.openai.model.internal.OpenAIEmbedding;
+import org.llm.openai.model.internal.OpenAIEmbedding.OpenAIEmbeddingReply;
 import org.rpc.service.RpcBuilder;
 
 import java.util.Arrays;
@@ -28,7 +30,7 @@ public class App {
                 .serviceUrl("https://api.openai.com/")
                 .create(OpenAIService.class);
 
-        //_embeddings(service);
+        _embeddings(service);
         //_chat(service);
 
         //_anthropicChat();
@@ -48,7 +50,8 @@ public class App {
         replyMessage.execute();
 
         if (replyMessage.isSuccess()) {
-            System.out.println(replyMessage.value());
+            var value = (ChatMessageReply) replyMessage.value();
+            System.out.println(value.message());
         } else {
             System.out.println(replyMessage.exception());
             System.out.println(replyMessage.error());
@@ -67,7 +70,8 @@ public class App {
         replyMessage.execute();
 
         if (replyMessage.isSuccess()) {
-            System.out.println(replyMessage.value());
+            var value = (ChatMessageReply) replyMessage.value();
+            System.out.println(value.message());
         } else {
             System.out.println(replyMessage.exception());
             System.out.println(replyMessage.error());
@@ -86,7 +90,8 @@ public class App {
         replyMessage.execute();
 
         if (replyMessage.isSuccess()) {
-            System.out.println(replyMessage.value());
+            var value = (ChatMessageReply) replyMessage.value();
+            System.out.println(value.message());
         } else {
             System.out.println(replyMessage.exception());
             System.out.println(replyMessage.error());
@@ -102,7 +107,8 @@ public class App {
         replyMessage.execute();
 
         if (replyMessage.isSuccess()) {
-            System.out.println(replyMessage.value().choices);
+            var value = (ChatMessageReply) replyMessage.value();
+            System.out.println(value.message());
         } else {
             System.out.println(replyMessage.exception());
             System.out.println(replyMessage.error());
@@ -116,7 +122,8 @@ public class App {
         reply.execute();
 
         if (reply.isSuccess()) {
-            System.out.println(Arrays.toString(reply.value().data.get(0).embedding));
+            var value = (EmbeddingReply) reply.value();
+            System.out.println(Arrays.toString(value.embedding()));
         } else {
             System.out.println(reply.exception());
             System.out.println(reply.error());

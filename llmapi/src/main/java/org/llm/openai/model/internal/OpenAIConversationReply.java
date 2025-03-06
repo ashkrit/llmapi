@@ -1,6 +1,7 @@
-package org.llm.openai.model;
+package org.llm.openai.model.internal;
 
 import com.google.gson.Gson;
+import org.llm.openai.model.ChatMessageReply;
 
 import java.util.List;
 
