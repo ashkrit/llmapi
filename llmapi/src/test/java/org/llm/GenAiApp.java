@@ -1,13 +1,15 @@
 package org.llm;
 
 import org.llm.openai.GenerativeAIDriverManager;
-import org.llm.openai.anthropic.AnthropicAIFactory;
-import org.llm.openai.google.GoogleAIFactory;
-import org.llm.openai.groq.GroqFactory;
+import org.llm.openai.impl.anthropic.AnthropicAIFactory;
+import org.llm.openai.impl.google.GoogleAIFactory;
+import org.llm.openai.impl.groq.GroqFactory;
 import org.llm.openai.model.ChatRequest;
 import org.llm.openai.model.ChatRequest.ChatMessage;
-import org.llm.openai.openai.OpenAIFactory;
+import org.llm.openai.impl.openai.OpenAIFactory;
+import org.llm.openai.model.EmbeddingRequest;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +42,9 @@ public class GenAiApp {
         var conversation = new ChatRequest("gpt-4o-mini", List.of(messages));
         var reply = service.chat(conversation);
         System.out.println(reply.message());
+
+        var vector = service.embedding(new EmbeddingRequest("text-embedding-3-small", "How are you"));
+        System.out.println(Arrays.toString(vector.embedding()));
     }
 
     private static void _anthropicAi() {

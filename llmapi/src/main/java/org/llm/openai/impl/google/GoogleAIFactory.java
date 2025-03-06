@@ -1,8 +1,7 @@
-package org.llm.openai.google;
+package org.llm.openai.impl.google;
 
 import org.llm.openai.GenerativeAIFactory;
 import org.llm.openai.GenerativeAIService;
-import org.llm.openai.anthropic.AnthropicGenerativeAIService;
 
 import java.util.Map;
 

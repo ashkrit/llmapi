@@ -1,4 +1,4 @@
-package org.llm.openai.model.internal;
+package org.llm.openai.impl.google;
 
 import org.llm.openai.model.ChatMessageReply;
 

@@ -1,8 +1,7 @@
-package org.llm.openai.groq;
+package org.llm.openai.impl.groq;
 
 import org.llm.openai.GenerativeAIFactory;
 import org.llm.openai.GenerativeAIService;
-import org.llm.openai.openai.OpenAIGenerativeAIService;
 
 import java.util.Map;
 

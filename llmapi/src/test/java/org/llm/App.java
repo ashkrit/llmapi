@@ -1,12 +1,12 @@
 package org.llm;
 
-import org.llm.openai.anthropic.AnthropicService;
-import org.llm.openai.google.GoogleService;
-import org.llm.openai.groq.GroqService;
+import org.llm.openai.impl.anthropic.AnthropicService;
+import org.llm.openai.impl.google.GoogleService;
+import org.llm.openai.impl.groq.GroqService;
 import org.llm.openai.model.*;
-import org.llm.openai.openai.OpenAIService;
-import org.llm.openai.model.internal.Conversation;
-import org.llm.openai.model.internal.GoogleConversation;
+import org.llm.openai.impl.openai.OpenAIService;
+import org.llm.openai.impl.openai.OpenAIConversationRequest;
+import org.llm.openai.impl.google.GoogleConversation;
 
 import org.rpc.service.RpcBuilder;
 
@@ -43,7 +43,7 @@ public class App {
                 .serviceUrl("https://api.anthropic.com")
                 .create(AnthropicService.class);
 
-        var message = new Conversation("claude-3-7-sonnet-20250219");
+        var message = new OpenAIConversationRequest("claude-3-7-sonnet-20250219");
         message.append("user", "Say this is test");
         var replyMessage = anthropicService.chat(anthropicApiKey, message);
         replyMessage.execute();
@@ -63,7 +63,7 @@ public class App {
                 .serviceUrl("https://api.groq.com/openai")
                 .create(GroqService.class);
 
-        var message = new Conversation("llama-3.3-70b-versatile");
+        var message = new OpenAIConversationRequest("llama-3.3-70b-versatile");
         message.append("user", "Say this is test");
         var replyMessage = service.chat(groqApiKey, message);
         replyMessage.execute();
@@ -100,7 +100,7 @@ public class App {
 
     private static void _chat(OpenAIService service) {
 
-        var message = new Conversation("gpt-4o-mini");
+        var message = new OpenAIConversationRequest("gpt-4o-mini");
         message.append("user", "Say this is test");
         var replyMessage = service.chat(gptApiKey, message);
         replyMessage.execute();

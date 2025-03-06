@@ -1,27 +1,27 @@
-package org.llm.openai.openai;
+package org.llm.openai.impl.groq;
 
 import org.llm.openai.GenerativeAIService;
 import org.llm.openai.model.ChatMessageReply;
 import org.llm.openai.model.ChatRequest;
-import org.llm.openai.model.internal.Conversation;
+import org.llm.openai.impl.openai.OpenAIConversationRequest;
 import org.rpc.service.RpcBuilder;
 
 import java.util.Map;
 
-public class OpenAIGenerativeAIService implements GenerativeAIService {
+public class GroqGenerativeAIService implements GenerativeAIService {
     private final Map<String, Object> properties;
-    private final OpenAIService service;
+    private final GroqService service;
 
-    public OpenAIGenerativeAIService(String url, Map<String, Object> properties) {
+    public GroqGenerativeAIService(String url, Map<String, Object> properties) {
         this.properties = properties;
-        this.service = new RpcBuilder().serviceUrl(url).create(OpenAIService.class);
+        this.service = new RpcBuilder().serviceUrl(url).create(GroqService.class);
     }
 
     @Override
     public ChatMessageReply chat(ChatRequest conversation) {
 
         var apiKey = "Bearer " + properties.get("apiKey");
-        var message = new Conversation(conversation.model());
+        var message = new OpenAIConversationRequest(conversation.model());
 
         //append conversation messages to the message
         conversation.messages().forEach(m -> {

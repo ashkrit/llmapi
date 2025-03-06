@@ -1,9 +1,9 @@
-package org.llm.openai.model.internal;
+package org.llm.openai.impl.openai;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Conversation {
+public class OpenAIConversationRequest {
 
     public final List<Message> messages = new ArrayList<>();
     public final String model;
@@ -12,14 +12,14 @@ public class Conversation {
     public final int top_p = 1;
     public final boolean stream;
 
-    public Conversation(String model, float temperature, boolean stream) {
+    public OpenAIConversationRequest(String model, float temperature, boolean stream) {
         this.model = model;
         this.temperature = temperature;
         this.stream = stream;
     }
 
     // constructor with temp 1
-    public Conversation(String model) {
+    public OpenAIConversationRequest(String model) {
         this(model, 1, false);
     }
 

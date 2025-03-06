@@ -1,4 +1,4 @@
-package org.llm.openai.model.internal;
+package org.llm.openai.impl.openai;
 
 import com.google.gson.Gson;
 import org.llm.openai.model.ChatMessageReply;
@@ -23,9 +23,9 @@ public class OpenAIConversationReply implements ChatMessageReply {
 
     public static class ReplyMessage {
         public final int index;
-        public final Conversation.Message message;
+        public final OpenAIConversationRequest.Message message;
 
-        public ReplyMessage(int index, Conversation.Message message) {
+        public ReplyMessage(int index, OpenAIConversationRequest.Message message) {
             this.index = index;
             this.message = message;
         }

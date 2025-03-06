@@ -1,7 +1,5 @@
-package org.llm.openai.google;
+package org.llm.openai.impl.google;
 
-import org.llm.openai.model.internal.GoogleConversation;
-import org.llm.openai.model.internal.GoogleMessageReply;
 import org.rpc.http.XBody;
 import org.rpc.http.XHeaders;
 import org.rpc.http.XPOST;

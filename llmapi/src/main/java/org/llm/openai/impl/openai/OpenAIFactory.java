@@ -1,4 +1,4 @@
-package org.llm.openai.openai;
+package org.llm.openai.impl.openai;
 
 import org.llm.openai.GenerativeAIFactory;
 import org.llm.openai.GenerativeAIService;

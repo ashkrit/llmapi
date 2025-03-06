@@ -1,10 +1,9 @@
-package org.llm.openai.anthropic;
+package org.llm.openai.impl.anthropic;
 
 import org.llm.openai.GenerativeAIService;
 import org.llm.openai.model.ChatMessageReply;
 import org.llm.openai.model.ChatRequest;
-import org.llm.openai.model.internal.Conversation;
-import org.llm.openai.openai.OpenAIService;
+import org.llm.openai.impl.openai.OpenAIConversationRequest;
 import org.rpc.service.RpcBuilder;
 
 import java.util.Map;
@@ -22,7 +21,7 @@ public class AnthropicGenerativeAIService implements GenerativeAIService {
     public ChatMessageReply chat(ChatRequest conversation) {
 
         var apiKey = (String) properties.get("apiKey");
-        var message = new Conversation(conversation.model());
+        var message = new OpenAIConversationRequest(conversation.model());
 
         //append conversation messages to the message
         conversation.messages().forEach(m -> {

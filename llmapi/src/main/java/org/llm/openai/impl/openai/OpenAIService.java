@@ -1,10 +1,7 @@
-package org.llm.openai.openai;
+package org.llm.openai.impl.openai;
 
 import org.llm.openai.model.EmbeddingRequest;
-import org.llm.openai.model.internal.Conversation;
-import org.llm.openai.model.internal.OpenAIConversationReply;
 
-import org.llm.openai.model.internal.OpenAIEmbeddingReply;
 import org.rpc.http.XBody;
 import org.rpc.http.XHeader;
 import org.rpc.http.XHeaders;
@@ -21,7 +18,7 @@ public interface OpenAIService {
 
     @XPOST("/v1/chat/completions")
     @XHeaders({"Content-Type: application/json"})
-    RpcReply<OpenAIConversationReply> chat(@XHeader("Authorization") String apiKey, @XBody Conversation conversation);
+    RpcReply<OpenAIConversationReply> chat(@XHeader("Authorization") String apiKey, @XBody OpenAIConversationRequest conversation);
 
 
 }

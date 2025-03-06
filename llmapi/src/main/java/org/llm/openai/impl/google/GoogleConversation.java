@@ -1,4 +1,4 @@
-package org.llm.openai.model.internal;
+package org.llm.openai.impl.google;
 
 import java.util.ArrayList;
 import java.util.List;

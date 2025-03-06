@@ -1,4 +1,4 @@
-package org.llm.openai.anthropic;
+package org.llm.openai.impl.anthropic;
 
 import org.llm.openai.GenerativeAIFactory;
 import org.llm.openai.GenerativeAIService;
