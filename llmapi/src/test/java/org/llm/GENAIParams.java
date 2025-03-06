@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.llm.openai.GenerativeAIDriverManager.registerService;
 
-public class GENAITypes {
+public class GENAIParams {
     public static void main(String[] args) {
 
         registerService(GoogleAIFactory.NAME, new GoogleAIFactory());
@@ -20,7 +20,7 @@ public class GENAITypes {
         var service = GenerativeAIDriverManager.create(GoogleAIFactory.NAME, "https://generativelanguage.googleapis.com", properties);
 
         var prompt = """
-                Top 5 Country by GPD. Reply in JSON format
+                Top {{number_of_top_country}} Country by GPD. Reply in JSON format
                 Example:
                 {
                 "countries":[
@@ -33,21 +33,19 @@ public class GENAITypes {
                 }
                 """;
 
-        ask(prompt, service, CountryGdp.class);
-        //ask(prompt, service, String.class);
 
-
-
-
-
-    }
-
-    private static void ask(String prompt, GenerativeAIService service, Class<?> clazz) {
         var messages = new ChatRequest.ChatMessage("user", prompt);
         var conversation = ChatRequest.create("gemini-2.0-flash", List.of(messages));
-        var reply = service.chat(conversation, clazz);
-        System.out.println(reply);
+
+        var preparedConversation = service.prepareRequest(conversation, Map.of("number_of_top_country", "10"));
+
+        var gdp = service.chat(preparedConversation, CountryGdp.class);
+        System.out.println(gdp);
+
+
     }
+
+
 
     public static class CountryGdp {
 
