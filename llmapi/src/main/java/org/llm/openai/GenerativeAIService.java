@@ -17,6 +17,12 @@ public interface GenerativeAIService {
         throw new UnsupportedOperationException("Not Supported");
     }
 
+    default <T> T chat(ChatRequest conversation, Class<T> returnType) {
+        return chat(conversation, returnType, (jsonContent, e) -> {
+            throw new RuntimeException("Failed to parse JSON: " + jsonContent, e);
+        }).get();
+    }
+
     default <T> Optional<T> chat(ChatRequest conversation, Class<T> returnType, BiConsumer<String, Exception> onFailedParsing) {
         var reply = chat(conversation);
         var message = reply.message();

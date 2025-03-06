@@ -42,10 +42,7 @@ public class GENAITypes {
     private static void ask(String prompt, GenerativeAIService service, Class<?> clazz) {
         var messages = new ChatRequest.ChatMessage("user", prompt);
         var conversation = ChatRequest.create("gemini-2.0-flash", List.of(messages));
-        var reply = service.chat(conversation, clazz, (text, e) -> {
-            System.out.println("Raw Text " + text);
-            e.printStackTrace();
-        });
+        var reply = service.chat(conversation, clazz);
         System.out.println(reply);
     }
 
