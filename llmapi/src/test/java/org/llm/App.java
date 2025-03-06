@@ -7,8 +7,7 @@ import org.llm.openai.model.*;
 import org.llm.openai.OpenAIService;
 import org.llm.openai.model.internal.Conversation;
 import org.llm.openai.model.internal.GoogleConversation;
-import org.llm.openai.model.internal.OpenAIEmbedding;
-import org.llm.openai.model.internal.OpenAIEmbedding.OpenAIEmbeddingReply;
+
 import org.rpc.service.RpcBuilder;
 
 import java.util.Arrays;
@@ -31,10 +30,10 @@ public class App {
                 .create(OpenAIService.class);
 
         _embeddings(service);
-        //_chat(service);
+        _chat(service);
 
-        //_anthropicChat();
-        // _groqChat();
+        _anthropicChat();
+        _groqChat();
         _googleChat();
 
     }
@@ -116,7 +115,7 @@ public class App {
     }
 
     private static void _embeddings(OpenAIService service) {
-        var openAIEmbedding = new OpenAIEmbedding("text-embedding-3-small", "How are you");
+        var openAIEmbedding = new EmbeddingRequest("text-embedding-3-small", "How are you");
         var reply = service.embedding(gptApiKey, openAIEmbedding);
 
         reply.execute();
