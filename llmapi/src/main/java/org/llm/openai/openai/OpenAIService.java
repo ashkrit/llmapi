@@ -1,4 +1,4 @@
-package org.llm.openai;
+package org.llm.openai.openai;
 
 import org.llm.openai.model.EmbeddingRequest;
 import org.llm.openai.model.internal.Conversation;

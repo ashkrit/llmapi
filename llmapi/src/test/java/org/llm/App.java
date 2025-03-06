@@ -4,7 +4,7 @@ import org.llm.openai.AnthropicService;
 import org.llm.openai.GoogleService;
 import org.llm.openai.GroqService;
 import org.llm.openai.model.*;
-import org.llm.openai.OpenAIService;
+import org.llm.openai.openai.OpenAIService;
 import org.llm.openai.model.internal.Conversation;
 import org.llm.openai.model.internal.GoogleConversation;
 
