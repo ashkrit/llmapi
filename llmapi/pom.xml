@@ -4,7 +4,7 @@
 
     <groupId>org.llm</groupId>
     <artifactId>llmapi</artifactId>
-    <version>1.0.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>llmapi</name>
