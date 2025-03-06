@@ -2,6 +2,7 @@ package org.llm;
 
 import com.google.gson.GsonBuilder;
 import org.llm.openai.GenerativeAIDriverManager;
+import org.llm.openai.GenerativeAIService;
 import org.llm.openai.impl.google.GoogleAIFactory;
 import org.llm.openai.model.ChatRequest;
 
@@ -31,11 +32,21 @@ public class GENAITypes {
                 ]
                 }
                 """;
+
+        ask(prompt, service, CountryGdp.class);
+        ask(prompt, service, String.class);
+
+
+    }
+
+    private static void ask(String prompt, GenerativeAIService service, Class<?> clazz) {
         var messages = new ChatRequest.ChatMessage("user", prompt);
         var conversation = ChatRequest.create("gemini-2.0-flash", List.of(messages));
-        var reply = service.chat(conversation, CountryGdp.class);
+        var reply = service.chat(conversation, clazz, (text, e) -> {
+            System.out.println("Raw Text " + text);
+            e.printStackTrace();
+        });
         System.out.println(reply);
-
     }
 
     public static class CountryGdp {

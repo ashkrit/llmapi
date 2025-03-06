@@ -6,6 +6,8 @@ import org.llm.openai.model.ChatRequest;
 import org.llm.openai.model.EmbeddingReply;
 import org.llm.openai.model.EmbeddingRequest;
 
+import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.regex.Pattern;
 
 public interface GenerativeAIService {
@@ -15,7 +17,7 @@ public interface GenerativeAIService {
         throw new UnsupportedOperationException("Not Supported");
     }
 
-    default <T> T chat(ChatRequest conversation, Class<T> returnType) {
+    default <T> Optional<T> chat(ChatRequest conversation, Class<T> returnType, BiConsumer<String, Exception> onFailedParsing) {
         var reply = chat(conversation);
         var message = reply.message();
 
@@ -27,6 +29,11 @@ public interface GenerativeAIService {
                 ? matcher.group(1)  // Extract content between markers
                 : message;         // Use full message if no markers
 
-        return new Gson().fromJson(jsonContent, returnType);
+        try {
+            return Optional.ofNullable(new Gson().fromJson(jsonContent, returnType));
+        } catch (Exception e) {
+            onFailedParsing.accept(jsonContent, e);
+            return Optional.empty();
+        }
     }
 }
