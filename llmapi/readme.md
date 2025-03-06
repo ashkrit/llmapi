@@ -76,11 +76,11 @@ System.out.println(Arrays.toString(vector.embedding()));
 
 ## Models
 
-- OpenAI: gpt-4o-mini, text-embedding-3-small
-- Anthropic: claude-3-7-sonnet-20250219
-- Google: gemma
-- Groq: llama-3.3-70b-versatile
-- Ollama: llama3.2, all-minilm
+- OpenAI: all
+- Anthropic: all
+- Google: gemini-2.0-flash
+- Groq: all
+- Ollama: all local models
 
 
 ## How to Register a Service Provider
