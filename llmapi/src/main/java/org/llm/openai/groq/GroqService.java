@@ -1,4 +1,4 @@
-package org.llm.openai;
+package org.llm.openai.groq;
 
 import org.llm.openai.model.internal.Conversation;
 import org.llm.openai.model.internal.OpenAIConversationReply;

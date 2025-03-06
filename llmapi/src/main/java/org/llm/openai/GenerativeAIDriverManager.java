@@ -1,14 +1,20 @@
 package org.llm.openai;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class GenerativeAIDriverManager {
 
-    private static final Map<String, GenerativeAIFactory> drivers = new HashMap<>();
+    private static final ConcurrentMap<String, GenerativeAIFactory> drivers = new ConcurrentHashMap<>();
 
     public static void registerService(String serviceName, GenerativeAIFactory factory) {
         drivers.put(serviceName, factory);
+    }
+
+    // remove service
+    public static void removeService(String serviceName) {
+        drivers.remove(serviceName);
     }
 
     public static GenerativeAIService create(String serviceType, String url, Map<String, Object> properties) {
@@ -20,4 +26,10 @@ public class GenerativeAIDriverManager {
         }
         return factory.create(url, properties);
     }
+
+    //services List<String>
+    public static String[] getServices() {
+        return drivers.keySet().toArray(new String[0]);
+    }
+
 }

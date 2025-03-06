@@ -2,7 +2,7 @@ package org.llm;
 
 import org.llm.openai.anthropic.AnthropicService;
 import org.llm.openai.google.GoogleService;
-import org.llm.openai.GroqService;
+import org.llm.openai.groq.GroqService;
 import org.llm.openai.model.*;
 import org.llm.openai.openai.OpenAIService;
 import org.llm.openai.model.internal.Conversation;
