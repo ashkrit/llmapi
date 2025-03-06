@@ -1,6 +1,7 @@
 package org.llm.openai.param;
 
 import org.llm.openai.model.ChatRequest;
+import org.llm.openai.model.ChatRequest.ChatMessage;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -14,7 +15,16 @@ public class ParamPreparedRequest {
         var lastChatMessage = messages.get(messages.size() - 1);
 
         var messageContent = lastChatMessage.content();
+        _validateParams(params, messageContent);
+        messageContent = _fillParams(params, messageContent);
 
+        //extract each param name from the message
+        var newMessages = _mergeMessage(conversation, lastChatMessage, messageContent);
+
+        return new ChatRequest(conversation.model(), conversation.temperature(), newMessages);
+    }
+
+    private static void _validateParams(Map<String, Object> params, String messageContent) {
         // Extract param names between {{ }}
         var paramPattern = Pattern.compile("\\{\\{([^}]+)}}");
         var matcher = paramPattern.matcher(messageContent);
@@ -32,21 +42,20 @@ public class ParamPreparedRequest {
         if (!missingParams.isEmpty()) {
             throw new IllegalArgumentException("Missing required parameters: " + String.join(", ", missingParams));
         }
+    }
 
-
+    private static String _fillParams(Map<String, Object> params, String messageContent) {
         //iterate all the params from "params" and replace the placeholders in the last message
         for (var entry : params.entrySet()) {
             messageContent = messageContent.replace("{{" + entry.getKey() + "}}", entry.getValue().toString());
         }
+        return messageContent;
+    }
 
-        //Check for occurrences of {{ and }} in the message and get the field names and throw exception
-        //extract each param name from the message
-
+    private static ArrayList<ChatMessage> _mergeMessage(ChatRequest conversation, ChatMessage lastChatMessage, String messageContent) {
         var headMessages = conversation.messages().subList(0, conversation.messages().size() - 1);
         var newMessages = new ArrayList<>(headMessages);
-        newMessages.add(new ChatRequest.ChatMessage(lastChatMessage.role(), messageContent));
-
-
-        return new ChatRequest(conversation.model(), conversation.temperature(), newMessages);
+        newMessages.add(new ChatMessage(lastChatMessage.role(), messageContent));
+        return newMessages;
     }
 }
