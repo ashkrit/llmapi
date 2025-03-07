@@ -1,4 +1,4 @@
-package org.llm;
+package org.llm.examples;
 
 import com.google.gson.GsonBuilder;
 import org.llm.openai.GenerativeAIDriverManager;

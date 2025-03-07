@@ -1,8 +1,7 @@
-package org.llm;
+package org.llm.examples;
 
 import com.google.gson.GsonBuilder;
 import org.llm.openai.GenerativeAIDriverManager;
-import org.llm.openai.GenerativeAIService;
 import org.llm.openai.impl.google.GoogleAIFactory;
 import org.llm.openai.model.ChatRequest;
 

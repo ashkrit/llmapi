@@ -1,4 +1,4 @@
-package org.llm;
+package org.llm.examples;
 
 import org.llm.openai.impl.anthropic.AnthropicService;
 import org.llm.openai.impl.google.GoogleService;
