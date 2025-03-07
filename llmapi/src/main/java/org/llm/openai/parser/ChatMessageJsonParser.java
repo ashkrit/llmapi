@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
 public class ChatMessageJsonParser {
 
     public static <T> Optional<T> parse(ChatMessageReply reply, Class<T> returnType, BiConsumer<String, Exception> onFailedParsing) {
+        if (reply.message() == null) {
+            return Optional.empty();
+        }
         var message = reply.message().trim();
         var jsonContent = _extractMessage(message);
         return _cast(returnType, onFailedParsing, jsonContent);
